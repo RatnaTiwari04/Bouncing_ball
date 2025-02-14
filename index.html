@@ -3,75 +3,67 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Bouncing Ball Game</title>
-    <style>
-        .container {
-            width: 80vw;
-            height: 80vh;
-            background-color: #9f9494;
-            position: relative;
-            overflow: hidden;
-        }
-        .ball {
-            background-color: red;
-            width: 50px;
-            height: 50px;
-            border-radius: 50%;
-            position: absolute;
-            top: 50%;
-            left: 0;
-        }
-        .score {
-            position: absolute;
-            top: 10px;
-            left: 10px;
-            font-size: 20px;
-            color: white;
-        }
-    </style>
+    <title>bouncing ball</title>
 </head>
+<style>
+    .container{
+        width: 80vw;
+        height: 80vh;
+        background-color: #9f9494;
+        display: flex;
+        flex-direction: column;
+        justify-content: flex-end;
+        }
+        .ball
+        {
+            background-color: red;
+         width: 100px;
+         height: 100px;
+         border-radius: 50%;
+         position: absolute;
+         /* animation: name duration timing-function delay iteration-count direction fill-mode; */
+         animation: bounce 5s linear 1s infinite alternate ;
+        }
+        @keyframes bounce{
+            0% {
+        transform: translateX(0) translateY(0);
+    }
+    10% {
+        transform: translateX(100px) translateY(-350px); /* Move right and up */
+    }
+    20% {
+        transform: translateX(200px) translateY(0); /* Land back */
+    }
+    30% {
+        transform: translateX(300px) translateY(-350px); /* Smaller bounce */
+    }
+    40% {
+        transform: translateX(400px) translateY(0); /* Stop after moving */
+    }
+    50% {
+        transform: translateX(500px) translateY(-350px); /* Move right and up */
+    }
+    60% {
+        transform: translateX(600px) translateY(0); /* Land back */
+    }
+    70% {
+        transform: translateX(700px) translateY(-350px); /* Smaller bounce */
+    }
+    80% {
+        transform: translateX(800px) translateY(0); /* Stop after moving */
+    }
+    90% {
+        transform: translateX(900px) translateY(-350px); /* Smaller bounce */
+    }
+    100% {
+        transform: translateX(1000px) translateY(0); /* Stop after moving */
+    }
+        }
+        
+</style>
 <body>
     <div class="container">
-        <div class="score">Score: <span id="score">0</span></div>
-        <div class="ball" id="ball"></div>
+    <div class="ball trans"></div>
     </div>
-    <script>
-        let ball = document.getElementById("ball");
-        let scoreDisplay = document.getElementById("score");
-        let score = 0;
-        let x = 0, y = 50, xSpeed = 5, ySpeed = -7, gravity = 0.3;
-        let containerWidth = document.querySelector(".container").offsetWidth;
-        let containerHeight = document.querySelector(".container").offsetHeight;
-        
-        function moveBall() {
-            x += xSpeed;
-            y += ySpeed;
-            ySpeed += gravity;
-
-            if (y >= containerHeight - 50) {
-                y = containerHeight - 50;
-                ySpeed = -Math.abs(ySpeed) * 0.8;
-            }
-
-            if (x >= containerWidth - 50) {
-                alert("Game Over! Your score: " + score);
-                score = 0;
-                x = 0;
-                y = 50;
-                ySpeed = -7;
-            }
-
-            ball.style.transform = `translate(${x}px, ${y}px)`;
-            requestAnimationFrame(moveBall);
-        }
-
-        ball.addEventListener("click", () => {
-            score++;
-            scoreDisplay.innerText = score;
-            ySpeed = -10;
-        });
-
-        moveBall();
-    </script>
 </body>
 </html>
